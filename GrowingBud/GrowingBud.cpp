@@ -9,6 +9,7 @@
 #define LEFT 75
 #define RIGHT 77
 #define UP 80
+int gogo=0;
 
 void SetConsoleView();
 void gotoxy(int x, int y);
@@ -18,14 +19,16 @@ void DrawBud(int budX, int budY);
 void MarkOne();
 void MarkTwo();
 void MarkThree();
-bool isinOne();
-bool isinTwo();
-bool isinThree();
+bool isinOne(const int budX, const int budY);
+bool isinTwo(const int budX, const int budY);
+bool isinThree(const int budX, const int budY);
 
 int main() {
     CursorView();
     char c = 0;
-    int x = 30, y = 26;
+    int x = 30,
+        
+        y = 26;
     //56 26 왼쪽 위부터
     while (true) {
         MarkOne();
@@ -40,7 +43,7 @@ int main() {
             switch (c) {
             case LEFT:
                 x--;
-                break;
+                break; 
             case RIGHT:
                 x++;
                 break;
@@ -54,6 +57,27 @@ int main() {
             Sleep(30);
             system("cls");
         }
+        if (isinOne(x, y)) {
+            gogo = 1;
+            break;
+        }
+        if (isinTwo(x, y)) {
+            gogo = 2;
+            break;
+        }
+        if (isinThree(x, y)) {
+            gogo = 3;
+            break;
+        }
+    }
+    if (gogo == 1) {
+        printf("1");
+    }
+    else if (gogo == 2) {
+        printf("2");
+    }
+    else if (gogo == 3) {
+        printf("3");
     }
 }
 
@@ -86,7 +110,7 @@ void CursorView()
 void DrawBud(int budX, int budY) {
     printf("\n");
     gotoxy(budX, budY);
-    /*printf("  ■■    ■■■■\n");
+   /* printf("  ■■    ■■■■\n");
     printf("■   ■■■■    ■  \n");
     printf("  ■■  ■  ■■\n");
     printf("        ■\n");*/
@@ -116,4 +140,28 @@ void MarkThree() {
     printf("                                                                 ================\n");
     printf("                                                                 ===벌레 피하기===\n");
     printf("                                                                 ================\n");
+}
+bool isinOne(const int budX, const int budY) {
+    //10~18&21~23
+    if (10 <= budX && budX <= 18 && 21 <= budY && budY <= 23) {
+        system("cls");
+        return TRUE;
+    }
+    else return FALSE;
+}
+bool isinTwo(const int budX, const int budY) {
+    //22~30&11~13
+    if (22 <= budX && budX <= 30 && 11 <= budY && budY <= 13) {
+        system("cls");
+        return TRUE;
+    }
+    else return FALSE;
+}
+bool isinThree(const int budX, const int budY) {
+    //32~40&16~18
+    if (32 <= budX && budX <= 40 && 16 <= budY && budY <= 18) {
+        system("cls");
+        return TRUE;
+    }
+    else return FALSE;
 }
