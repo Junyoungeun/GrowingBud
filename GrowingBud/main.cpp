@@ -1,57 +1,20 @@
 ﻿#include "main.h"
 
 int gogo=0;
-
+int x = 30, y = 26;
+char c = 0;
+int j = -1;
 int main() {
     CursorView();
-    char c = 0;
-    int x = 30, y = 26;
+    //char c = 0;
+    //int x = 30, y = 26;
     //56 26 왼쪽 위부터
     while (true) {
-        MarkOne();
-        MarkTwo();
-        MarkThree();
-        DrawBud(x, y);
-        //printf("■");
-        //gotoxy(x, y);
-        //printf("%d %d",x, y);
-        if (_kbhit()) {        //키보드 입력 확인 (true / false)
-            c = _getch();// 방향키 입력시 224 00이 들어오게 되기에 앞에 있는 값 224를 없앰
-            switch (c) {
-            case LEFT:
-                x--;
-                break; 
-            case RIGHT:
-                x++;
-                break;
-            case UP:
-                y++;
-                break;
-            case DOWN:
-                y--;
-                break;
-            }
-            if (x < 0)
-                x = 0;
-            if (x > WIDTH - 1)
-                x = WIDTH - 1;
-            Sleep(30);
-            system("cls");
-        }
-        if (isinOne(x, y)) {
-            gogo = 1;
-            break;
-        }
-        if (isinTwo(x, y)) {
-            gogo = 2;
-            break;
-        }
-        if (isinThree(x, y)) {
-            gogo = 3;
-            break;
-        }
+        FirstScene();
+        if (j)break;
     }
     if (gogo == 1) {
+        gogo == 0;
         srand(time(NULL));
         initKillerGame();
         do {
@@ -62,11 +25,32 @@ int main() {
             PrintKillerGame();
             Sleep(10);
         } while (!(DamagedBud()));
+        system("cls");
+        x = 30, y = 26;
+        while (true) {
+            FirstScene();
+            if (isinOne(x, y)) {
+                gogo = 1;
+                break;
+            }
+            if (isinTwo(x, y)) {
+                gogo = 2;
+                break;
+            }
+            if (isinThree(x, y)) {
+                gogo = 3;
+                break;
+            }
+        }
+        //gogo가 1,2,3일때로 이동
+        //
     }
     else if (gogo == 2) {
+        gogo = 0;
         printf("2");
     }
     else if (gogo == 3) {
+        gogo = 0;
         printf("3");
     }
 }
@@ -130,6 +114,52 @@ void MarkThree() {
     printf("                                                                 ===벌레 피하기===\n");
     printf("                                                                 ================\n");
 }
+int FirstScene() {
+    MarkOne();
+    MarkTwo();
+    MarkThree();
+    DrawBud(x, y);
+    //printf("■");
+    //gotoxy(x, y);
+    //printf("%d %d",x, y);
+    if (_kbhit()) {        //키보드 입력 확인 (true / false)
+        c = _getch();// 방향키 입력시 224 00이 들어오게 되기에 앞에 있는 값 224를 없앰
+        switch (c) {
+        case LEFT:
+            x--;
+            break;
+        case RIGHT:
+            x++;
+            break;
+        case UP:
+            y++;
+            break;
+        case DOWN:
+            y--;
+            break;
+        }
+        if (x < 0)
+            x = 0;
+        if (x > WIDTH - 1)
+            x = WIDTH - 1;
+        Sleep(30);
+        system("cls");
+    }
+    if (isinOne(x, y)) {
+        gogo = 1;
+        return j=1;
+    }
+    else if (isinTwo(x, y)) {
+        gogo = 2;
+        return j=1;
+    }
+    else if (isinThree(x, y)) {
+        gogo = 3;
+        return j=1;
+    }
+    else return j=0;
+
+}
 bool isinOne(const int budX, const int budY) {
     //10~18&21~23
     if (10 <= budX && budX <= 18 && 21 <= budY && budY <= 23) {
@@ -153,4 +183,19 @@ bool isinThree(const int budX, const int budY) {
         return TRUE;
     }
     else return FALSE;
+}
+bool isinMark() {
+    if (isinOne(x, y)) {
+        gogo = 1;
+        return true;
+    }
+    else if (isinTwo(x, y)) {
+        gogo = 2;
+        return true;
+    }
+    else if (isinThree(x, y)) {
+        gogo = 3;
+        return true;
+    }
+    else return false;
 }

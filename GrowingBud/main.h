@@ -30,6 +30,8 @@ void DrawBud(int budX, int budY);
 void MarkOne();
 void MarkTwo();
 void MarkThree();
+int FirstScene();
 bool isinOne(const int budX, const int budY);
 bool isinTwo(const int budX, const int budY);
 bool isinThree(const int budX, const int budY);
+bool isinMark();
