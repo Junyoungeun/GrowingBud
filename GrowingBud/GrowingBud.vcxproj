@@ -139,7 +139,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GrowingBud.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="AvoidKiller.cpp" />
+    <ClCompile Include="FindHome.cpp" />
+    <ClCompile Include="Run.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AvoidKiller.h" />
+    <ClInclude Include="FindHome.h" />
+    <ClInclude Include="Run.h" />
+    <ClInclude Include="main.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
