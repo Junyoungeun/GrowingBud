@@ -2,6 +2,8 @@
 
 const int N = HEIGHT + 1;
 const int M = HEIGHT + 1;
+//const int N = 7;
+//const int M = 7;
 
 
 int d[4][2] = { -2, 0, 0, 2, 2, 0, 0, -2 };
@@ -37,15 +39,28 @@ void drawMaze() {
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < M; j++) {
             if (maze[i][j] == 1) {
-                gotoxy(i + 1, j + 1);
+                gotoxy(i , j + 1);
                 printf("⑻");
+                //⑻,⑵
             }
             else {
                 gotoxy(i + 1, j + 1);
                 printf(" ");
             }
-            gotoxy(N - 1, M - 1);
-            printf("O"); //格利瘤
+            gotoxy(N - 2, M - 1);
+            printf("≮"); //格利瘤
         }
     }
 }
+
+bool ismoveable(int x, int y) {
+    if (maze[x][y-1] == 1)return false;
+    else return true;
+}
+
+bool finishMaze(int x, int y) {
+    if (x == N - 2 && y == M - 1)
+        return true;
+    else return false;
+}
+

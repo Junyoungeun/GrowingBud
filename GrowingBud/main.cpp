@@ -6,29 +6,20 @@ char c = 0;
 int j = -1;
 int main() {
     CursorView();
-    //char c = 0;
-    //int x = 30, y = 26;
-    //56 26 왼쪽 위부터
     
-    //while (true) {
-    //    FirstScene();
-    //    if (j)break;
-    //}
+    while (true) {
+        FirstScene();
+        if (j)break;
+    }
     gogo = 2;
     if (gogo == 1) {
         gogoOne();        
         //gogo가 1,2,3일때로 이동
+        //
     }
     else if (gogo == 2) {
-        gogo = 0;
-        printf("2");
-        srand(time(NULL));
-        createwall();
-        createmaze(1, 1);
-        while (1) {
-            drawMaze();
-
-        }
+        gogoTwo();
+ 
     }
     else if (gogo == 3) {
         gogo = 0;
@@ -40,7 +31,6 @@ void SetConsoleView() {
     system("mode con:conls=100 lines=25");
     system("title GrowingBud. By JYE");
 }
-
 void gotoxy(int x, int y)
 {
     COORD Pos;        //x, y를 가지고 있는 구조체
@@ -194,4 +184,65 @@ void gogoOne() {
             break;
         }
     }
+}
+void gogoTwo() {
+    gogo = 0;
+    srand(time(NULL));
+    createwall();
+    createmaze(1, 1);
+    x = 1, y = 2;
+    while (1) {
+        drawMaze();
+        DrawBud(x, y);
+
+        if (_kbhit()) {        //키보드 입력 확인 (true / false)
+            c = _getch();// 방향키 입력시 224 00이 들어오게 되기에 앞에 있는 값 224를 없앰
+
+            switch (c) {
+            case LEFT:
+                if (ismoveable(x - 1, y))
+                    x--;
+                break;
+            case RIGHT:
+                if (ismoveable(x + 1, y))
+                    x++;
+                break;
+            case UP:
+                if (ismoveable(x, y + 1))
+                    y++;
+                break;
+            case DOWN:
+                if (ismoveable(x, y - 1))
+                    y--;
+                break;
+            }
+            if (x < 0)
+                x = 0;
+            if (x > WIDTH - 1)
+                x = WIDTH - 1;
+            Sleep(30);
+            system("cls");
+        }
+        if (finishMaze(x, y)) {
+            system("cls");
+            x = 30, y = 26;
+            break;
+        }
+    }
+    while (true) {
+        FirstScene();
+        if (isinOne(x, y)) {
+            gogo = 1;
+            break;
+        }
+        if (isinTwo(x, y)) {
+            gogo = 2;
+            break;
+        }
+        if (isinThree(x, y)) {
+            gogo = 3;
+            break;
+        }
+    }
+
 }
