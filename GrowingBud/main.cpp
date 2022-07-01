@@ -9,45 +9,26 @@ int main() {
     //char c = 0;
     //int x = 30, y = 26;
     //56 26 왼쪽 위부터
-    while (true) {
-        FirstScene();
-        if (j)break;
-    }
+    
+    //while (true) {
+    //    FirstScene();
+    //    if (j)break;
+    //}
+    gogo = 2;
     if (gogo == 1) {
-        gogo == 0;
-        srand(time(NULL));
-        initKillerGame();
-        do {
-            CreateKiller();
-            FallKiller();
-            DelKiller();
-            MoveBudOne();
-            PrintKillerGame();
-            Sleep(10);
-        } while (!(DamagedBud()));
-        system("cls");
-        x = 30, y = 26;
-        while (true) {
-            FirstScene();
-            if (isinOne(x, y)) {
-                gogo = 1;
-                break;
-            }
-            if (isinTwo(x, y)) {
-                gogo = 2;
-                break;
-            }
-            if (isinThree(x, y)) {
-                gogo = 3;
-                break;
-            }
-        }
+        gogoOne();        
         //gogo가 1,2,3일때로 이동
-        //
     }
     else if (gogo == 2) {
         gogo = 0;
         printf("2");
+        srand(time(NULL));
+        createwall();
+        createmaze(1, 1);
+        while (1) {
+            drawMaze();
+
+        }
     }
     else if (gogo == 3) {
         gogo = 0;
@@ -184,18 +165,33 @@ bool isinThree(const int budX, const int budY) {
     }
     else return FALSE;
 }
-bool isinMark() {
-    if (isinOne(x, y)) {
-        gogo = 1;
-        return true;
+void gogoOne() {
+    gogo == 0;
+    srand(time(NULL));
+    initKillerGame();
+    do {
+        CreateKiller();
+        FallKiller();
+        DelKiller();
+        MoveBudOne();
+        PrintKillerGame();
+        Sleep(10);
+    } while (!(DamagedBud()));
+    system("cls");
+    x = 30, y = 26;
+    while (true) {
+        FirstScene();
+        if (isinOne(x, y)) {
+            gogo = 1;
+            break;
+        }
+        if (isinTwo(x, y)) {
+            gogo = 2;
+            break;
+        }
+        if (isinThree(x, y)) {
+            gogo = 3;
+            break;
+        }
     }
-    else if (isinTwo(x, y)) {
-        gogo = 2;
-        return true;
-    }
-    else if (isinThree(x, y)) {
-        gogo = 3;
-        return true;
-    }
-    else return false;
 }
