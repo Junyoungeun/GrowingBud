@@ -1,17 +1,17 @@
 ﻿#include "main.h"
 
 int gogo=0;
-int x = 30, y = 26;
+int x = FirstX, y = FirstY;
 char c = 0;
 int j = -1;
 int main() {
     CursorView();
     
-    while (true) {
-        FirstScene();
-        if (j)break;
-    }
-    gogo = 2;
+    //while (true) {
+    //    FirstScene();
+    //    if (j)break;
+    //}
+    gogo = 3;
     if (gogo == 1) {
         gogoOne();        
         //gogo가 1,2,3일때로 이동
@@ -24,6 +24,42 @@ int main() {
     else if (gogo == 3) {
         gogo = 0;
         printf("3");
+        while (true) {
+            DrawBigBud(x, y);
+            initRunGame();
+            initObstacle();
+            if(_kbhit()) {        //키보드 입력 확인 (true / false)
+                c = _getch();// 방향키 입력시 224 00이 들어오게 되기에 앞에 있는 값 224를 없앰
+                switch (c) {
+                case LEFT:
+                    x--;
+                    break;
+                case RIGHT:
+                    x++;
+                    break;
+                case UP:
+                    y++;
+                    break;
+                case DOWN:
+                    y--;
+                    break;
+                }
+                if (x < 0)
+                    x = 0;
+                if (x > WIDTH - 1)
+                    x = WIDTH - 1;
+                Sleep(30);
+                system("cls");
+            }
+            isCollision(WIDTH, y, x);
+            budJump(FirstX, HEIGHT - 1);
+            moveObstacle();
+            runningScore();
+            Sleep(100);
+            system("cls");
+            runningScore();
+        }
+
     }
 }
 
@@ -61,6 +97,17 @@ void DrawBud(int budX, int budY) {
     //printf("  ■■    ■■■■\n■   ■■■■    ■  \n  ■■  ■  ■■\n        ■\n");
     printf("♣");
 }
+void DrawBigBud(int budX, int budY) {
+    gotoxy(budX, budY);
+    printf("  ■■    ■■■■\n");
+    gotoxy(budX, budY + 1);
+    printf("■   ■■■■    ■  \n");
+    gotoxy(budX, budY + 2);
+    printf("  ■■  ■  ■■\n");
+    gotoxy(budX, budY + 3);
+    printf("        ■\n");
+    
+}
 void MarkOne() {
     //10~18&21~23
     gotoxy(10, 20);
@@ -90,6 +137,7 @@ int FirstScene() {
     MarkTwo();
     MarkThree();
     DrawBud(x, y);
+    //DrawBigBud(x, y);
     //printf("■");
     //gotoxy(x, y);
     //printf("%d %d",x, y);
@@ -168,7 +216,7 @@ void gogoOne() {
         Sleep(10);
     } while (!(DamagedBud()));
     system("cls");
-    x = 30, y = 26;
+    x = FirstX, y = FirstY;
     while (true) {
         FirstScene();
         if (isinOne(x, y)) {
@@ -225,7 +273,7 @@ void gogoTwo() {
         }
         if (finishMaze(x, y)) {
             system("cls");
-            x = 30, y = 26;
+            x = FirstX, y = FirstY;
             break;
         }
     }

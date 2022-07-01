@@ -19,6 +19,8 @@
 #define TRUE 1
 #define FALSE 0
 //56 26
+#define FirstX 30
+#define FirstY 26
 
 
 
@@ -27,6 +29,7 @@ void gotoxy(int x, int y);
 int GetKeyDown();
 void CursorView();
 void DrawBud(int budX, int budY);
+void DrawBigBud(int budX, int budY);
 void MarkOne();
 void MarkTwo();
 void MarkThree();
