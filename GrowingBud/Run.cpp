@@ -3,7 +3,7 @@ bool isJumping;
 bool isBottom;
 
 int startthree, currthree;
-extern int score[3];
+extern int score[4];
 extern int x, y;
 extern Obstacle obstacle[ObsN];
 

@@ -1,9 +1,12 @@
 #include "FindHome.h"
 
-const int N = HEIGHT + 1;
-const int M = HEIGHT + 1;
-//const int N = 7;
-//const int M = 7;
+int starttwo, currtwo;
+extern int score[4];
+//const int N = HEIGHT + 1;
+//const int M = HEIGHT + 1;
+const int N = 7;
+const int M = 7;
+
 
 
 int d[4][2] = { -2, 0, 0, 2, 2, 0, 0, -2 };
@@ -14,7 +17,7 @@ int maze[N][M];
 void createwall() {
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < M; j++) {
-            if (i % 2 == 1 && j % 2 == 1)continue;
+            if (i % 2 == 1 && j % 2 == 1) maze[i][j] = 0;
             else maze[i][j] = 1;
         }
     }
@@ -64,3 +67,16 @@ bool finishMaze(int x, int y) {
     else return false;
 }
 
+void runningScoreTwo() {
+    currtwo = clock();
+    if ((currtwo - starttwo) / CLOCKS_PER_SEC >= 1) {
+        score[2]++;
+        starttwo = clock();
+    }
+}
+
+void DrawScoreTwo() {
+    gotoxy(WIDTH - 15, 1);
+    printf("Time : %d/40", score[2]);
+    //printf("Time : %d", 21 - score[2]);
+}

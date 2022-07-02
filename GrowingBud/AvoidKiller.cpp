@@ -92,8 +92,7 @@ void DrawScoreOne() {
 }
 
 bool FinishGameOne() {
-    if (score[1] >= 5) {
-        printf("¿À¿¹");
+    if (score[1] >= 20) {
         return true;
     }
     else return false;
