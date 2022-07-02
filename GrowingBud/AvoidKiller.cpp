@@ -78,7 +78,7 @@ void PrintKillerGame() {
         printf("¢Ì");
 }
 
-void runningScoreOne() {
+void runningTimeOne() {
     currone = clock();
     if ((currone - startone) / CLOCKS_PER_SEC >= 1) {
         score[1]++;
@@ -86,9 +86,9 @@ void runningScoreOne() {
     }
 }
 
-void DrawScoreOne() {
+void DrawTimeOne() {
     gotoxy(WIDTH - 15, 1);
-    printf("Score : %d", score[1]);
+    printf("Time : %d/20", score[1]);
 }
 
 bool FinishGameOne() {

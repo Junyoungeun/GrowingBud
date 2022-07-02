@@ -68,7 +68,7 @@ void moveObstacleThree() {
 	}
 }
 
-void runningScoreThree() {
+void runningTimeThree() {
 	currthree = clock();
 	if ((currthree - startthree) / CLOCKS_PER_SEC >= 1) {
 		score[3]++;
@@ -76,8 +76,8 @@ void runningScoreThree() {
 	}
 }
 
-void DrawScoreThree() {
+void DrawTimeThree() {
 	gotoxy(WIDTH - 15, 1);
-	printf("Score : %d", score[3]);
+	printf("Time : %d/25", score[3]);
 }
 

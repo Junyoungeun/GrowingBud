@@ -228,8 +228,9 @@ void gogoOne() {
         DelKiller();
         MoveBudOne();
         PrintKillerGame();
-        runningScoreOne();
-        DrawScoreOne();
+        runningTimeOne();
+        DrawTimeOne();
+        if (DamagedBud())budVersion = budVersionOne;
         if (FinishGameOne()) {
             score[1] = 0;
             budVersion = budVersionOne;
@@ -312,8 +313,8 @@ void gogoTwo() {
             budVersion = budVersionTwo + 1;
             break;
         }
-        runningScoreTwo();
-        DrawScoreTwo();
+        runningTimeTwo();
+        DrawTimeTwo();
         if (score[2] == 40) {
             system("cls");
             break;
@@ -401,8 +402,8 @@ void gogoThree() {
         if (y <= HEIGHT - 9)
             isJumping = false;
 
-        runningScoreThree();
-        DrawScoreThree();
+        runningTimeThree();
+        DrawTimeThree();
     }
     if (score[3] >= 20) {
         system("cls");

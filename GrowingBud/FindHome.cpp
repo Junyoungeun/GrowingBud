@@ -67,7 +67,7 @@ bool finishMaze(int x, int y) {
     else return false;
 }
 
-void runningScoreTwo() {
+void runningTimeTwo() {
     currtwo = clock();
     if ((currtwo - starttwo) / CLOCKS_PER_SEC >= 1) {
         score[2]++;
@@ -75,7 +75,7 @@ void runningScoreTwo() {
     }
 }
 
-void DrawScoreTwo() {
+void DrawTimeTwo() {
     gotoxy(WIDTH - 15, 1);
     printf("Time : %d/40", score[2]);
     //printf("Time : %d", 21 - score[2]);
