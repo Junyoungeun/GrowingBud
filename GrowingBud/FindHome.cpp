@@ -2,10 +2,10 @@
 
 int starttwo, currtwo;
 extern int score[4];
-//const int N = HEIGHT + 1;
-//const int M = HEIGHT + 1;
-const int N = 7;
-const int M = 7;
+const int N = HEIGHT + 1;
+const int M = HEIGHT + 1;
+//const int N = 7;
+//const int M = 7;
 
 
 

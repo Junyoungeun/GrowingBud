@@ -230,7 +230,12 @@ void gogoOne() {
         PrintKillerGame();
         runningTimeOne();
         DrawTimeOne();
-        if (DamagedBud())budVersion = budVersionOne;
+        if (DamagedBud()) {
+            if (budVersionOne == 1)
+                budVersion = budVersionOne;
+            else if (budVersionOne > 1)
+                budVersion = budVersionOne - 1;
+        }
         if (FinishGameOne()) {
             score[1] = 0;
             budVersion = budVersionOne;
@@ -267,10 +272,8 @@ void gogoTwo() {
     score[2] = 0;
     createwall();
     gotoxy(30, HEIGHT-1);
-    printf("createwall");
     createmaze(1, 1);
     gotoxy(30, HEIGHT);
-    printf("createmaze");
 
     x = 1, y = 2;
     drawMaze();
@@ -316,6 +319,10 @@ void gogoTwo() {
         runningTimeTwo();
         DrawTimeTwo();
         if (score[2] == 40) {
+            if (budVersionTwo == 1)
+                budVersion = budVersionTwo;
+            else if (budVersionTwo > 1)
+                budVersion = budVersionTwo - 1;
             system("cls");
             break;
         }
@@ -411,7 +418,10 @@ void gogoThree() {
     }
     else {
         system("cls");
-        budVersion = budVersionThree;
+        if(budVersionThree==1)
+            budVersion = budVersionThree;
+        else if(budVersionThree > 1)
+            budVersion = budVersionThree - 1;
     }
     if (budVersion == 5)
         FinishGame();
