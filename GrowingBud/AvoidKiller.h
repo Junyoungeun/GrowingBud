@@ -19,3 +19,6 @@ void FallKiller();
 void DelKiller();
 int DamagedBud();
 void PrintKillerGame();
+void runningScoreOne();
+void DrawScoreOne();
+bool FinishGameOne();

@@ -2,7 +2,7 @@
 bool isJumping;
 bool isBottom;
 
-int start, curr;
+int startthree, currthree;
 extern int score[3];
 extern int x, y;
 extern Obstacle obstacle[ObsN];
@@ -68,15 +68,15 @@ void moveObstacleThree() {
 	}
 }
 
-void runningScore() {
-	curr = clock();
-	if ((curr - start) / CLOCKS_PER_SEC >= 1) {
+void runningScoreThree() {
+	currthree = clock();
+	if ((currthree - startthree) / CLOCKS_PER_SEC >= 1) {
 		score[3]++;
-		start = clock();
+		startthree = clock();
 	}
 }
 
-void DrawScore() {
+void DrawScoreThree() {
 	gotoxy(WIDTH - 15, 1);
 	printf("Score : %d", score[3]);
 }

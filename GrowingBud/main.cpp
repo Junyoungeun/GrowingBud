@@ -1,10 +1,10 @@
 ﻿#include "main.h"
-int gogo=0;
+int gogo = 0;
 int x = FirstX, y = FirstY;
 char c = 0;
 int j = -1;
-int budVersion = 1, budVersionNew=1;
-int score[4] = {0};
+int budVersion = 1, budVersionOne = 1, budVersionThree = 1;
+int score[4] = { 0 };
 Obstacle obstacle[ObsN];
 
 int main() {
@@ -27,7 +27,7 @@ int main() {
 }
 
 
-    
+
 
 
 void SetConsoleView() {
@@ -42,7 +42,7 @@ void gotoxy(int x, int y)
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
 }
 
-//키보드의 입력을 받고, 입력된 키의 값을 반환하는 함수
+//키보드의 입력을 받고, 입력된 키의 값을 반환하는 함수
 int GetKeyDown() {
     if (_kbhit() != 0) {
         return _getch();
@@ -57,7 +57,7 @@ void CursorView()
     SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursorInfo);
 }
 void DrawBud(int budX, int budY) {
-    
+
 
     if (budVersion == 1) {
         gotoxy(budX, budY);
@@ -66,7 +66,7 @@ void DrawBud(int budX, int budY) {
     else if (budVersion == 2) {
         gotoxy(budX, budY);
         printf("■■ ■■");
-        gotoxy(budX, budY+1);
+        gotoxy(budX, budY + 1);
         printf(" ■■■");
         gotoxy(budX, budY + 2);
         printf("   ■");
@@ -89,10 +89,10 @@ void DrawBud(int budX, int budY) {
         printf("   ■■■■■■\n");
         gotoxy(budX, budY - 3);
         printf("  ■         ■\n");
-        gotoxy(budX, budY-2);
+        gotoxy(budX, budY - 2);
         printf("  ■■■■■■■\n");
-        gotoxy(budX, budY-1);
-        printf("        ■\n");        
+        gotoxy(budX, budY - 1);
+        printf("        ■\n");
         gotoxy(budX, budY);
         printf("  ■■ ■■ ■■■■\n");
         gotoxy(budX, budY + 1);
@@ -105,9 +105,8 @@ void DrawBud(int budX, int budY) {
         printf("        ■\n");
 
     }
-
-
 }
+
 void MarkOne() {
     //10~18&21~23
     gotoxy(10, 20);
@@ -134,9 +133,9 @@ void MarkThree() {
 }
 int FirstScene() {
     if (budVersion > 3)
-        while(1)
+        while (1)
             FinishGame();
-        //printf("새싹 키우기 성공");
+    //printf("새싹 키우기 성공");
     MarkOne();
     MarkTwo();
     MarkThree();
@@ -166,17 +165,17 @@ int FirstScene() {
     }
     if (isinOne(x, y)) {
         gogo = 1;
-        return j=1;
+        return j = 1;
     }
     else if (isinTwo(x, y)) {
         gogo = 2;
-        return j=1;
+        return j = 1;
     }
     else if (isinThree(x, y)) {
         gogo = 3;
-        return j=1;
+        return j = 1;
     }
-    else return j=0;
+    else return j = 0;
     if (gogo == 1) {
         gogoOne();
         //gogo가 1,2,3일때로 이동
@@ -189,7 +188,7 @@ int FirstScene() {
     else if (gogo == 3) {
         gogoThree();
     }
-    
+
 }
 bool isinOne(const int budX, const int budY) {
     //10~18&21~23
@@ -218,6 +217,8 @@ bool isinThree(const int budX, const int budY) {
 void gogoOne() {
     gogo == 0;
     srand(time(NULL));
+    budVersionOne = budVersion;
+    budVersion = 1;
     initKillerGame();
     do {
         CreateKiller();
@@ -225,6 +226,15 @@ void gogoOne() {
         DelKiller();
         MoveBudOne();
         PrintKillerGame();
+        runningScoreOne();
+        DrawScoreOne();
+        printf("score %d %d", score[1], score[3]);
+        if (FinishGameOne()) {
+            score[1] = 0;
+            budVersion = budVersionOne;
+            budVersion += 1;
+            break;
+        }
         Sleep(10);
     } while (!(DamagedBud()));
     system("cls");
@@ -313,23 +323,23 @@ void gogoTwo() {
     while (true) {
         FirstScene();
         if (j)break;
-    //    if (isinOne(x, y)) {
-    //        gogo = 1;
-    //        break;
-    //    }
-    //    if (isinTwo(x, y)) {
-    //        gogo = 2;
-    //        break;
-    //    }
-    //    if (isinThree(x, y)) {
-    //        gogo = 3;
-    //        break;
-    //    }
+        //    if (isinOne(x, y)) {
+        //        gogo = 1;
+        //        break;
+        //    }
+        //    if (isinTwo(x, y)) {
+        //        gogo = 2;
+        //        break;
+        //    }
+        //    if (isinThree(x, y)) {
+        //        gogo = 3;
+        //        break;
+        //    }
     }
 
 }
 void gogoThree() {
-    budVersionNew = budVersion;
+    budVersionThree = budVersion;
     budVersion = 3;
     x = 32;
     y = HEIGHT;
@@ -338,16 +348,15 @@ void gogoThree() {
     bool isBottom = true;
     const int gravity = 3;
 
-    clock_t start, curr;
-    start = clock();
+    clock_t startthree, currthree;
+    startthree = clock();
 
     initObstacle(y);
     while (1) {
         gotoxy(0, 0);
 
         if (isCollision()) {
-            //gotoxy(0, 5);
-            //printf("충돌");
+            score[3] = 0;
             break;
         }
         if (_kbhit()) {        //키보드 입력 확인 (true / false)
@@ -375,23 +384,32 @@ void gogoThree() {
         }
 
         DrawBud(x, y - 4);
+        printf("%d", score[3]);
         if (score[3] < 5)
             moveObstacleOne();
         else if (5 <= score[3] < 15)
             moveObstacleTwo();
-        else
+        else if (15 <= score[3] <= 25)
             moveObstacleThree();
+        else if (score[3] > 25)
+            break;
         Sleep(30);
         system("cls");
 
         if (y <= HEIGHT - 9)
             isJumping = false;
 
-        runningScore();
-        DrawScore();
+        runningScoreThree();
+        DrawScoreThree();
     }
-    if (score[3] >= 1)
-        budVersion = budVersionNew + 1;
+    if (score[3] >= 20) {
+        system("cls");
+        budVersion = budVersionThree + 1;
+    }
+    else {
+        system("cls");
+        budVersion = budVersionThree;
+    }
     if (budVersion >= 4)
         FirstScene();
     while (true) {
@@ -419,7 +437,7 @@ void FinishGame() {
     budVersion = 5;
     DrawBud(x, y);
     gotoxy(26, 4);
-    printf("＃＃＃＃＃＃＃＃＃＃"); 
+    printf("＃＃＃＃＃＃＃＃＃＃");
     gotoxy(26, 5);
     printf("＃새싹 키우기 성공＃");
     gotoxy(26, 6);

@@ -17,5 +17,5 @@ bool isCollision();
 void moveObstacleOne();
 void moveObstacleTwo();
 void moveObstacleThree();
-void runningScore();
-void DrawScore();
+void runningScoreThree();
+void DrawScoreThree();

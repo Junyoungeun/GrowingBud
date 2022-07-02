@@ -2,6 +2,8 @@
 
 Killer killer[WIDTH];
 Bud bud;
+int startone, currone;
+extern int score[3];
 
 void MoveBudOne() {
     int c = 0;
@@ -76,3 +78,23 @@ void PrintKillerGame() {
         printf("¢Ì");
 }
 
+void runningScoreOne() {
+    currone = clock();
+    if ((currone - startone) / CLOCKS_PER_SEC >= 1) {
+        score[1]++;
+        startone = clock();
+    }
+}
+
+void DrawScoreOne() {
+    gotoxy(WIDTH - 15, 1);
+    printf("Score : %d", score[1]);
+}
+
+bool FinishGameOne() {
+    if (score[1] >= 5) {
+        printf("¿À¿¹");
+        return true;
+    }
+    else return false;
+}
