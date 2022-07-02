@@ -1,11 +1,15 @@
 #pragma once
 #include "main.h"
 #include <time.h>
+#define ObsN 2
+struct Obstacle {
+	int x;
+	int y;
+};
 
 void initRunGame();
-void budJump(int x, int y);
-void initObstacle();
-bool isCollision(const int ObstacleX, const int budY, int x);
+void initObstacle(int budY);
+bool isCollision();
 void moveObstacle();
 void runningScore();
 void DrawScore();

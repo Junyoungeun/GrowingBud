@@ -23,7 +23,6 @@
 #define FirstY 26
 
 
-
 void SetConsoleView();
 void gotoxy(int x, int y);
 int GetKeyDown();

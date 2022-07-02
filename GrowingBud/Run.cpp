@@ -1,9 +1,11 @@
 #include "Run.h"
 bool isJumping;
 bool isBottom;
-const int gravity = 3;
-int ObstacleX=WIDTH, ObstacleY=HEIGHT;
+
 int start, curr, score;
+extern int x, y;
+extern Obstacle obstacle[ObsN];
+
 
 void initRunGame() {
 	bool isJumping = false;
@@ -11,45 +13,39 @@ void initRunGame() {
 
 }
 
-void budJump(int x, int y) {
-	if (GetKeyDown() == SPACE && isBottom) {
-		isJumping = true;
-		isBottom = false;
+void initObstacle(int budY) {
+	int ObsX = WIDTH -10;
+	for (int i = 0; i < ObsN; i++) {
+		obstacle[i].x = ObsX;
+		obstacle[i].y = budY;
+		ObsX += 10;
+		gotoxy(obstacle[i].x, obstacle[i].y);
+		printf("бу");
 	}
-	if (isJumping)
-		y -= gravity;
-	else
-		y += gravity;
-	
-	if (y >= HEIGHT) {
-		y = HEIGHT;
-		isBottom = true;
-	}
-	if (y <= 3)
-		isJumping = false;
 }
 
-void initObstacle() {
-	gotoxy(ObstacleX, ObstacleY);
-	printf("бс");
-	gotoxy(ObstacleX, ObstacleY-1);
-	printf("бу");
-}
-
-bool isCollision(const int ObstacleX, const int budY, int x) {
+bool isCollision() {
 	gotoxy(0, 0);
-	printf("ObstacleX: %d, budY: %d", ObstacleX, budY);
-	if (x - 2 <= ObstacleX && ObstacleX <= x + 2 && budY > ObstacleY - 1)
-		return true;
-	return false;
+	printf("X %d, Y %d\n", x, y);
+	printf("ObstacleX %d, ObstacleY %d\n", obstacle[0].x, obstacle[0].y);
+	printf("ObstacleX %d, ObstacleY %d\n", obstacle[1].x, obstacle[1].y);
 
-
+	for (int i = 0; i < ObsN; i++) {
+		if (obstacle[i].x == 30 && y < HEIGHT) {
+			return true;
+		}
+		return false;
+	}
 }
 
 void moveObstacle() {
-	ObstacleX -= 2;
-	if (ObstacleX <= 0)
-		ObstacleX = WIDTH;
+	for (int i = 0; i < ObsN; i++) {
+		obstacle[i].x -= 1;
+		if (obstacle[i].x <= 0)
+			obstacle[i].x = WIDTH;
+		gotoxy(obstacle[i].x, obstacle[i].y);
+		printf("бу");
+	}
 
 }
 

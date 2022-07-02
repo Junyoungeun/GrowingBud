@@ -4,64 +4,82 @@ int gogo=0;
 int x = FirstX, y = FirstY;
 char c = 0;
 int j = -1;
+Obstacle obstacle[ObsN];
+
 int main() {
     CursorView();
-    
+
     //while (true) {
     //    FirstScene();
     //    if (j)break;
     //}
     gogo = 3;
     if (gogo == 1) {
-        gogoOne();        
+        gogoOne();
         //gogo가 1,2,3일때로 이동
         //
     }
     else if (gogo == 2) {
         gogoTwo();
- 
-    }
-    else if (gogo == 3) {
-        gogo = 0;
-        printf("3");
-        while (true) {
-            DrawBigBud(x, y);
-            initRunGame();
-            initObstacle();
-            if(_kbhit()) {        //키보드 입력 확인 (true / false)
-                c = _getch();// 방향키 입력시 224 00이 들어오게 되기에 앞에 있는 값 224를 없앰
-                switch (c) {
-                case LEFT:
-                    x--;
-                    break;
-                case RIGHT:
-                    x++;
-                    break;
-                case UP:
-                    y++;
-                    break;
-                case DOWN:
-                    y--;
-                    break;
-                }
-                if (x < 0)
-                    x = 0;
-                if (x > WIDTH - 1)
-                    x = WIDTH - 1;
-                Sleep(30);
-                system("cls");
-            }
-            isCollision(WIDTH, y, x);
-            budJump(FirstX, HEIGHT - 1);
-            moveObstacle();
-            runningScore();
-            Sleep(100);
-            system("cls");
-            runningScore();
-        }
 
     }
+    else if (gogo == 3) {
+        x = 32;
+        y = HEIGHT;
+
+        bool isJumping = false;
+        bool isBottom = true;
+        const int gravity = 3;
+        int score = 0;
+        clock_t start, curr;
+        start = clock();
+
+        initObstacle(y);
+        while (1) {
+            if (isCollision()) {
+                gotoxy(0, 5);
+                printf("충돌");
+                break;
+            }
+            if (_kbhit()) {        //키보드 입력 확인 (true / false)
+                c = _getch();// 방향키 입력시 224 00이 들어오게 되기에 앞에 있는 값 224를 없앰
+                switch (c) {
+                case SPACE:
+                    if (isBottom) {                      
+                        isJumping = true;
+                        isBottom = false;
+                    }
+                    break;
+                }
+            }
+            
+            if (isJumping)
+                y -= gravity;
+            else
+                y += gravity;
+
+            for (int i = 0; i < ObsN; i++) {
+                if (y >= obstacle[i].y) {
+                    y = obstacle[i].y;
+                    isBottom = true;
+                }
+            }
+            DrawBigBud(x, y - 4);
+            moveObstacle();
+            Sleep(30);
+            system("cls");
+
+            if (y <= HEIGHT-9)
+                isJumping = false;
+
+
+        }
+    }
 }
+
+
+    
+
 
 void SetConsoleView() {
     system("mode con:conls=100 lines=25");
@@ -80,6 +98,7 @@ int GetKeyDown() {
     if (_kbhit() != 0) {
         return _getch();
     }
+    return 0;
 }
 void CursorView()
 {
@@ -106,7 +125,8 @@ void DrawBigBud(int budX, int budY) {
     printf("  ■■  ■  ■■\n");
     gotoxy(budX, budY + 3);
     printf("        ■\n");
-    
+    gotoxy(budX, budY + 4);
+    printf("        ■\n");
 }
 void MarkOne() {
     //10~18&21~23
