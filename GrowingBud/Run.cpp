@@ -14,11 +14,11 @@ void initRunGame() {
 }
 
 void initObstacle(int budY) {
-	int ObsX = WIDTH -10;
+	int ObsX = WIDTH -8;
 	for (int i = 0; i < ObsN; i++) {
 		obstacle[i].x = ObsX;
 		obstacle[i].y = budY;
-		ObsX += 10;
+		ObsX += 12;
 		gotoxy(obstacle[i].x, obstacle[i].y);
 		printf("бу");
 	}
@@ -31,16 +31,17 @@ bool isCollision() {
 	printf("ObstacleX %d, ObstacleY %d\n", obstacle[1].x, obstacle[1].y);
 
 	for (int i = 0; i < ObsN; i++) {
-		if (obstacle[i].x == 30 && y < HEIGHT) {
+		if (obstacle[i].x ==36&& y ==obstacle[i].y) {
 			return true;
 		}
-		return false;
 	}
+	return false;
 }
+//36-2<=obstacle[i].x &&obstacle[i].x <= 36+2 
 
 void moveObstacle() {
 	for (int i = 0; i < ObsN; i++) {
-		obstacle[i].x -= 1;
+		obstacle[i].x -= 4;
 		if (obstacle[i].x <= 0)
 			obstacle[i].x = WIDTH;
 		gotoxy(obstacle[i].x, obstacle[i].y);

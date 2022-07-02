@@ -37,8 +37,8 @@ int main() {
         initObstacle(y);
         while (1) {
             if (isCollision()) {
-                gotoxy(0, 5);
-                printf("충돌");
+                //gotoxy(0, 5);
+                //printf("충돌");
                 break;
             }
             if (_kbhit()) {        //키보드 입력 확인 (true / false)
@@ -71,8 +71,9 @@ int main() {
 
             if (y <= HEIGHT-9)
                 isJumping = false;
-
-
+        }
+        while (1) {
+            FirstScene();
         }
     }
 }
