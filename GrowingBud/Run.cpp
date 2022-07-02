@@ -26,9 +26,9 @@ void initObstacle(int budY) {
 
 bool isCollision() {
 	gotoxy(0, 0);
-	printf("X %d, Y %d\n", x, y);
+	/*printf("X %d, Y %d\n", x, y);
 	printf("ObstacleX %d, ObstacleY %d\n", obstacle[0].x, obstacle[0].y);
-	printf("ObstacleX %d, ObstacleY %d\n", obstacle[1].x, obstacle[1].y);
+	printf("ObstacleX %d, ObstacleY %d\n", obstacle[1].x, obstacle[1].y);*/
 
 	for (int i = 0; i < ObsN; i++) {
 		if (obstacle[i].x ==36&& y ==obstacle[i].y) {
@@ -37,17 +37,34 @@ bool isCollision() {
 	}
 	return false;
 }
-//36-2<=obstacle[i].x &&obstacle[i].x <= 36+2 
 
-void moveObstacle() {
+void moveObstacleOne() {
 	for (int i = 0; i < ObsN; i++) {
-		obstacle[i].x -= 4;
+		obstacle[i].x -= levelOne;
 		if (obstacle[i].x <= 0)
 			obstacle[i].x = WIDTH;
 		gotoxy(obstacle[i].x, obstacle[i].y);
 		printf("бу");
 	}
+}
 
+void moveObstacleTwo() {
+	for (int i = 0; i < ObsN; i++) {
+		obstacle[i].x -= levelTwo;
+		if (obstacle[i].x <= 0)
+			obstacle[i].x = WIDTH;
+		gotoxy(obstacle[i].x, obstacle[i].y);
+		printf("бу");
+	}
+}
+void moveObstacleThree() {
+	for (int i = 0; i < ObsN; i++) {
+		obstacle[i].x -= levelThree;
+		if (obstacle[i].x <= 0)
+			obstacle[i].x = WIDTH;
+		gotoxy(obstacle[i].x, obstacle[i].y);
+		printf("бу");
+	}
 }
 
 void runningScore() {

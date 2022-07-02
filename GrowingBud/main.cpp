@@ -65,12 +65,20 @@ int main() {
                 }
             }
             DrawBigBud(x, y - 4);
-            moveObstacle();
+            if (score <= 5)
+                moveObstacleOne();
+            else if (5<=score<=15)
+                moveObstacleTwo();
+            else
+                moveObstacleThree();
             Sleep(30);
             system("cls");
 
             if (y <= HEIGHT-9)
                 isJumping = false;
+
+            runningScore();
+            DrawScore();
         }
         while (1) {
             FirstScene();
