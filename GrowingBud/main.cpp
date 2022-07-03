@@ -326,20 +326,6 @@ void gogoTwo() {
     if (budVersion >= 4)
         FinishGame();
     return;
-    /*while (true) {
-        FirstScene();
-        if (j)break;
-    }
-    if (gogo == 1) {
-        gogoOne();
-    }
-    else if (gogo == 2) {
-        gogoTwo();
-
-    }
-    else if (gogo == 3) {
-        gogoThree();
-    }*/
 }
 void gogoThree() {
     budVersionThree = budVersion;
@@ -388,7 +374,6 @@ void gogoThree() {
 
         DrawBud(x, y - 4);
         DrawBug();
-        //printf("%d", score[3]);
         if (score[3] < 5)
             moveObstacleOne();
         else if (5 <= score[3]&& score[3] < 15)
@@ -399,11 +384,6 @@ void gogoThree() {
             break;
         Sleep(30);
         system("cls");
-        gotoxy(0, 0);
-        printf("%d %d\n", obstacle[0].x, obstacle[0].y);
-        gotoxy(0, 2);
-        printf("%d %d\n", obstacle[1].x, obstacle[1].y);
-
 
         if (y <= HEIGHT - 9)
             isJumping = false;
@@ -424,24 +404,8 @@ void gogoThree() {
     }
     if (budVersion == 5)
         FinishGame();
-        //FirstScene();
     x = FirstX, y = FirstY;
     return;
-   /* while (true) {
-        FirstScene();
-        if (j)break;
-    }
-    if (gogo == 1) {
-        gogoOne();
-    }
-    else if (gogo == 2) {
-        gogoTwo();
-
-    }
-    else if (gogo == 3) {
-        gogoThree();
-    }*/
-
 }
 
 void FinishGame() {
@@ -459,5 +423,4 @@ void FinishGame() {
     gotoxy(25, 10);
     printf("창을 종료하세요");
     return;
-    //system("pause<null");
 }
