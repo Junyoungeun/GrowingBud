@@ -26,10 +26,6 @@ void initObstacle(int budY) {
 }
 
 bool isCollision() {
-	gotoxy(0, 0);
-	/*printf("X %d, Y %d\n", x, y);
-	printf("ObstacleX %d, ObstacleY %d\n", obstacle[0].x, obstacle[0].y);
-	printf("ObstacleX %d, ObstacleY %d\n", obstacle[1].x, obstacle[1].y);*/
 
 	for (int i = 0; i < ObsN; i++) {
 		if (obstacle[i].x ==36&& y ==obstacle[i].y) {
@@ -79,5 +75,14 @@ void runningTimeThree() {
 void DrawTimeThree() {
 	gotoxy(WIDTH - 15, 1);
 	printf("Time : %d/25", score[3]);
+}
+
+void DrawBug() {
+	gotoxy(2, FirstY - 2);
+	printf("¢Â¢Â¢Â¢Â");
+	gotoxy(2, FirstY - 1);
+	printf("¢Â¢Â¢Â¢Â");
+	gotoxy(2, FirstY);
+	printf("£ü£ü£ü£ü");
 }
 

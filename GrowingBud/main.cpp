@@ -133,10 +133,6 @@ void MarkThree() {
     printf("                                                                 ================\n");
 }
 int FirstScene() {
-    //if (budVersion > 3)
-    //    //while (1)
-    //        FinishGame();
-    //printf("새싹 키우기 성공");
     gogo = 0;
     MarkOne();
     MarkTwo();
@@ -266,8 +262,8 @@ void gogoOne() {
 }
 void gogoTwo() {
     gogo = 0;
-    srand(time(NULL));
     budVersionTwo = budVersion;
+    srand(time(NULL));
     budVersion = 1;
     score[2] = 0;
     createwall();
@@ -302,8 +298,7 @@ void gogoTwo() {
                     y--;
                 break;
             }
-            if (x < 0)
-                x = 0;
+            if (x < 0) x = 0;
             if (x > WIDTH - 1)
                 x = WIDTH - 1;
             Sleep(30);
@@ -326,8 +321,6 @@ void gogoTwo() {
             system("cls");
             break;
         }
-        
-
     }
     x = FirstX, y = FirstY;
     if (budVersion >= 4)
@@ -394,6 +387,7 @@ void gogoThree() {
         }
 
         DrawBud(x, y - 4);
+        DrawBug();
         //printf("%d", score[3]);
         if (score[3] < 5)
             moveObstacleOne();
@@ -405,6 +399,11 @@ void gogoThree() {
             break;
         Sleep(30);
         system("cls");
+        gotoxy(0, 0);
+        printf("%d %d\n", obstacle[0].x, obstacle[0].y);
+        gotoxy(0, 2);
+        printf("%d %d\n", obstacle[1].x, obstacle[1].y);
+
 
         if (y <= HEIGHT - 9)
             isJumping = false;

@@ -2,9 +2,9 @@
 #include "main.h"
 #include <time.h>
 #define ObsN 2
-#define levelOne 2
-#define levelTwo 4
-#define levelThree 12
+#define levelOne 1
+#define levelTwo 2
+#define levelThree 4
 
 struct Obstacle {
 	int x;
@@ -19,3 +19,4 @@ void moveObstacleTwo();
 void moveObstacleThree();
 void runningTimeThree();
 void DrawTimeThree();
+void DrawBug();
